@@ -4,7 +4,7 @@ var date = moment().format("MM Do, YYYY");
 
 var current = moment().format("H A");
 
-var planWorkday = [
+var schedule = [
   { time: "9:00 AM", event: "" },
   { time: "10:00 AM", event: "" },
   { time: "11:00 AM", event: "" },
@@ -16,14 +16,14 @@ var planWorkday = [
   { time: "5:00 PM", event: "" },
 ];
 
-var workEvents = JSON.parse(localStorage.getItem("workDay"));
-if (workEvents) {
-  planWorkday = workEvents;
+var assignments = JSON.parse(localStorage.getItem("workDay"));
+if (assignments) {
+  schedule = assignments;
 }
 
 $("#presentDay").text(date);
 
-planWorkday.forEach(function(timeBlock, index) {
+schedule.forEach(function(timeBlock, index) {
 	var timeLabel = timeBlock.time;
 	var blockColor = colorRow(timeLabel);
 	var row =
@@ -64,7 +64,7 @@ $(".saveBtn").on("click", function() {
 			.siblings("textarea")
 			.val()
 	);
-	planWorkday[blockID].event = userEntry;
+	schedule[blockID].event = userEntry;
 
-	localStorage.setItem("workDay", JSON.stringify(planWorkday));
+	localStorage.setItem("workDay", JSON.stringify(schedule));
 });
